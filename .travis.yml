@@ -11,4 +11,4 @@ before_script:
   - php app/console doctrine:schema:create --env=test
 
 script:
-  - phpunit -c app
+  - ./bin/simple-phpunit -c app
