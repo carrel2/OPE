@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @Mapping\Entity
@@ -23,7 +24,8 @@ class Attendee
   private $firstname;
 
   /**
-   * @Mapping\Column(type="string", length=1)
+   * @Mapping\Column(type="string", length=2)
+   * @Assert\Regex("/[A-Z]\./")
    */
   private $middleinitial;
 
@@ -34,11 +36,13 @@ class Attendee
 
   /**
    * @Mapping\Column(type="string")
+   * @Assert\Email()
    */
   private $email;
 
   /**
    * @Mapping\Column(type="string")
+   * @Assert\Regex("/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/")
    */
   private $phonenumber;
 

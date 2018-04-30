@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @Mapping\Entity
@@ -24,6 +25,9 @@ class OPEEvent
 
   /**
    * @Mapping\Column(type="array")
+   * @Assert\All({
+   *    @Assert\Date()
+   * })
    */
   private $dates;
 
