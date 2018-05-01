@@ -62,4 +62,19 @@ class AttendeeTest extends TestCase
     $attendee->setPhoneNumber("5555555555");
     $this->assertEquals(1, count($this->validator->validate($attendee)));
   }
+
+  public function testOPEEvents() {
+    $attendee = new Attendee();
+    $opeEvent = new \AppBundle\Entity\OPEEvent();
+
+    $this->assertInstanceOf(\Doctrine\Common\Collections\ArrayCollection::class, $attendee->getOPEEvents());
+    $this->assertTrue($attendee->getOPEEvents()->isEmpty());
+
+    $this->assertNotFalse($attendee->addOPEEvent($opeEvent));
+    $this->assertFalse($attendee->addOPEEvent($opeEvent));
+    $this->assertTrue($attendee->getOPEEvents()->contains($opeEvent));
+
+    $this->assertTrue($attendee->removeOPEEvent($opeEvent));
+    $this->assertFalse($attendee->getOPEEvents()->contains($opeEvent));
+  }
 }

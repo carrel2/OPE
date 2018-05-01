@@ -125,9 +125,13 @@ class Attendee
   }
 
   public function addOPEEvent(\AppBundle\Entity\OPEEvent $opeEvent) {
-    $this->opeEvents->add($opeEvent);
+    if( !$this->opeEvents->contains($opeEvent) ) {
+      $this->opeEvents->add($opeEvent);
 
-    return $this;
+      return $this;
+    }
+
+    return false;
   }
 
   public function removeOPEEvent(\AppBundle\Entity\OPEEvent $opeEvent) {
