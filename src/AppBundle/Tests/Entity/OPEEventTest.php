@@ -3,6 +3,7 @@
 namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\OPEEvent;
+use AppBundle\Entity\Attendee;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validation;
 
@@ -46,5 +47,19 @@ class OPEEventTest extends TestCase
     $opeEvent->removeDate($currentTime);
     $this->assertNotContains($currentTime, $opeEvent->getDates());
     $this->assertEquals(0, count($this->validator->validate($opeEvent)));
+  }
+
+  public function testAttendees() {
+    $attendee = new Attendee();
+    $opeEvent = new OPEEvent();
+
+    $this->assertNotFalse($opeEvent->addAttendee($attendee));
+    $this->assertFalse($opeEvent->addAttendee($attendee));
+    $this->assertTrue($opeEvent->getAttendees()->contains($attendee));
+    $this->assertTrue($attendee->getOPEEvents()->contains($opeEvent));
+
+    $this->assertTrue($opeEvent->removeAttendee($attendee));
+    $this->assertFalse($opeEvent->getAttendees()->contains($attendee));
+    $this->assertFalse($attendee->getOPEEvents()->contains($opeEvent));
   }
 }

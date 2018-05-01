@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Mapping\Entity
@@ -31,8 +32,14 @@ class OPEEvent
    */
   private $dates;
 
+  /**
+   * @Mapping\ManyToMany(targetEntity="Attendee", mappedBy="opeEvents")
+   */
+  private $attendees;
+
   public function __construct() {
     $this->dates = [];
+    $this->attendees = new ArrayCollection();
   }
 
   public function getId() {
@@ -71,5 +78,30 @@ class OPEEvent
 
   public function getDates() {
     return $this->dates;
+  }
+
+  public function setAttendees(ArrayCollection $attendees) {
+    $this->attendees = $attendees;
+  }
+
+  public function getAttendees() {
+    return $this->attendees;
+  }
+
+  public function addAttendee(\AppBundle\Entity\Attendee $attendee) {
+    if( !$this->attendees->contains($attendee) ) {
+      $attendee->addOPEEvent($this);
+      $this->attendees->add($attendee);
+
+      return $this;
+    }
+
+    return false;
+  }
+
+  public function removeAttendee(\AppBundle\Entity\Attendee $attendee) {
+    $attendee->removeOPEEvent($this);
+
+    return $this->attendees->removeElement($attendee);
   }
 }

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>OPE events list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Dates</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for oPEEvent in oPEEvents %}
+            <tr>
+                <td><a href="{{ path('opeevent_show', { 'id': oPEEvent.id }) }}">{{ oPEEvent.id }}</a></td>
+                <td>{{ oPEEvent.title }}</td>
+                <td>{% if oPEEvent.dates %}{{ oPEEvent.dates|join(', ') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('opeevent_show', { 'id': oPEEvent.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('opeevent_edit', { 'id': oPEEvent.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('opeevent_new') }}">Create a new event</a>
+        </li>
+    </ul>
+{% endblock %}

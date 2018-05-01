@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Opeevent</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ oPEEvent.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ oPEEvent.title }}</td>
+            </tr>
+            <tr>
+                <th>Dates</th>
+                <td>{% if oPEEvent.dates %}{{ oPEEvent.dates|join(', ') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('opeevent_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('opeevent_edit', { 'id': oPEEvent.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

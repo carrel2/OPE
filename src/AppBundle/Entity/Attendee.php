@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @Mapping\Entity
@@ -46,6 +47,15 @@ class Attendee
    */
   private $phonenumber;
 
+  /**
+   * @Mapping\ManyToMany(targetEntity="OPEEvent", inversedBy="attendees")
+   */
+  private $opeEvents;
+
+  public function __construct() {
+    $this->opeEvents = new ArrayCollection();
+  }
+
   public function getId() {
     return $this->id;
   }
@@ -84,7 +94,6 @@ class Attendee
     return sprintf("%s %s %s", $this->firstname, $this->middleinitial, $this->lastname);
   }
 
-  // TODO: add constraints to ensure proper formatting
   public function setEmail($email) {
     $this->email = $email;
 
@@ -95,7 +104,6 @@ class Attendee
     return $this->email;
   }
 
-  // TODO: add constraints to ensure proper formatting
   public function setPhoneNumber($number) {
     $this->phonenumber = $number;
 
@@ -104,5 +112,25 @@ class Attendee
 
   public function getPhoneNumber() {
     return $this->phonenumber;
+  }
+
+  public function setOPEEvents(ArrayCollection $opeEvents) {
+    $this->opeEvents = $opeEvents;
+
+    return $this;
+  }
+
+  public function getOPEEvents() {
+    return $this->opeEvents;
+  }
+
+  public function addOPEEvent(\AppBundle\Entity\OPEEvent $opeEvent) {
+    $this->opeEvents->add($opeEvent);
+
+    return $this;
+  }
+
+  public function removeOPEEvent(\AppBundle\Entity\OPEEvent $opeEvent) {
+    return $this->opeEvents->removeElement($opeEvent);
   }
 }
