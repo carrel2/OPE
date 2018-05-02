@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
 /**
  * Opeevent controller.
  *
- * @Route("opeevent")
+ * @Route("event")
  */
 class OPEEventController extends Controller
 {

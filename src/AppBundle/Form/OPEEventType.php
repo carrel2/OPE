@@ -8,15 +8,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class OPEEventType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title')->add('dates')->add('attendees');
-    }/**
-     * {@inheritdoc}
-     */
+        $builder->add('title')
+          ->add('dates')
+          ->add('attendees');
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -24,13 +22,8 @@ class OPEEventType extends AbstractType
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'appbundle_opeevent';
     }
-
-
 }

@@ -21,10 +21,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('opeevent_show', { 'id': oPEEvent.id }) }}">show</a>
+                            <a class="button" href="{{ path('opeevent_show', { 'id': oPEEvent.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('opeevent_edit', { 'id': oPEEvent.id }) }}">edit</a>
+                            <a class="button" href="{{ path('opeevent_edit', { 'id': oPEEvent.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -35,7 +35,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('opeevent_new') }}">Create a new event</a>
+            <a class="button" href="{{ path('opeevent_new') }}">Create a new event</a>
         </li>
     </ul>
 {% endblock %}
