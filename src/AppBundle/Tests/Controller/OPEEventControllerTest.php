@@ -11,14 +11,14 @@ class OPEEventControllerTest extends WebTestCase
         // Create a new client to browse the application
         $client = static::createClient();
 
-        /* // Create a new entry in the database
-        $crawler = $client->request('GET', '/opeevent/');
+        // Create a new entry in the database
+        $crawler = $client->request('GET', '/event/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /opeevent/");
-        $crawler = $client->click($crawler->selectLink('Create a new entry')->link());
+        $crawler = $client->click($crawler->selectLink('Create a new event')->link());
 
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
-            'appbundle_opeevent[field_name]'  => 'Test',
+            'appbundle_opeevent[title]'  => 'Test',
             // ... other fields to fill
         ));
 
@@ -32,7 +32,7 @@ class OPEEventControllerTest extends WebTestCase
         $crawler = $client->click($crawler->selectLink('Edit')->link());
 
         $form = $crawler->selectButton('Update')->form(array(
-            'appbundle_opeevent[field_name]'  => 'Foo',
+            'appbundle_opeevent[title]'  => 'Foo',
             // ... other fields to fill
         ));
 
@@ -48,6 +48,5 @@ class OPEEventControllerTest extends WebTestCase
 
         // Check the entity has been delete on the list
         $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
-        */
     }
 }
