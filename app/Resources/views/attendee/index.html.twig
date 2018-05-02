@@ -27,10 +27,10 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('attendee_show', { 'id': attendee.id }) }}">show</a>
+                            <a class="button" href="{{ path('attendee_show', { 'id': attendee.id }) }}">show</a>
                         </li>
                         <li>
-                            <a href="{{ path('attendee_edit', { 'id': attendee.id }) }}">edit</a>
+                            <a class="button" href="{{ path('attendee_edit', { 'id': attendee.id }) }}">edit</a>
                         </li>
                     </ul>
                 </td>
@@ -41,7 +41,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('attendee_new') }}">Create a new attendee</a>
+            <a class="button" href="{{ path('attendee_new') }}">Create a new attendee</a>
         </li>
     </ul>
 {% endblock %}

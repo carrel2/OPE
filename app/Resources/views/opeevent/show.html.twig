@@ -22,10 +22,10 @@
 
     <ul>
         <li>
-            <a href="{{ path('opeevent_index') }}">Back to the list</a>
+            <a class="button" href="{{ path('opeevent_index') }}">Back to the list</a>
         </li>
         <li>
-            <a href="{{ path('opeevent_edit', { 'id': oPEEvent.id }) }}">Edit</a>
+            <a class="button" href="{{ path('opeevent_edit', { 'id': oPEEvent.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
