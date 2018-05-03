@@ -53,7 +53,7 @@ class OPEEventTest extends TestCase
     $attendee = new Attendee();
     $opeEvent = new OPEEvent();
 
-    $this->assertInstanceOf(\Doctrine\Common\Collections\ArrayCollection::class, $opeEvent->getAttendees());
+    $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $opeEvent->getAttendees());
     $this->assertTrue($opeEvent->getAttendees()->isEmpty());
 
     $this->assertNotFalse($opeEvent->addAttendee($attendee));
