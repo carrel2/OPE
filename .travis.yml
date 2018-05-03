@@ -17,6 +17,7 @@ before_script:
   - composer install
   - php app/console doctrine:database:create --env=test
   - php app/console doctrine:schema:create --env=test
+  - php app/console server:run localhost:80
 
 script:
   - ./bin/simple-phpunit -c app
