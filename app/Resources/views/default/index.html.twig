@@ -14,22 +14,18 @@
 {% block body %}
   <div class="columns">
     <div class="column">
-      {% if events is empty %}
-        <a class="button" href="{{ path('opeevent_new') }}">Create a new event</a>
-      {% else %}
-        {% for event in events %}
-            <a href="{{ path('opeevent_show', {'id': event.id}) }}">{{ event.title }}</a>
-        {% endfor %}
-      {% endif %}
+      <a class="button" href="{{ path('opeevent_new') }}">Create a new event</a>
+
+      {% for event in events %}
+          <a href="{{ path('opeevent_show', {'id': event.id}) }}">{{ event.title }}</a>
+      {% endfor %}
     </div>
     <div class="column">
-      {% if attendees is empty %}
-        <a class="button" href="{{ path('attendee_new') }}">Create a new attendee</a>
-      {% else %}
-        {% for attendee in attendees %}
-            <a href="{{ path('attendee_show', {'id': attendee.id}) }}">{{ attendee.getFullName() }}</a>
-        {% endfor %}
-      {% endif %}
+      <a class="button" href="{{ path('attendee_new') }}">Create a new attendee</a>
+
+      {% for attendee in attendees %}
+          <a href="{{ path('attendee_show', {'id': attendee.id}) }}">{{ attendee.getFullName() }}</a>
+      {% endfor %}
     </div>
   </div>
 {% endblock %}

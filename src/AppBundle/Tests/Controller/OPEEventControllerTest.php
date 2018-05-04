@@ -19,6 +19,7 @@ class OPEEventControllerTest extends WebTestCase
         // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
             'appbundle_opeevent[title]'  => 'Test',
+            'appbundle_opeevent[ceHours]' => '2.5',
             // ... other fields to fill
         ));
 
@@ -33,6 +34,7 @@ class OPEEventControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('Update')->form(array(
             'appbundle_opeevent[title]'  => 'Foo',
+            'appbundle_opeevent[ceHours]' => '3.2',
             // ... other fields to fill
         ));
 

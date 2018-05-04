@@ -11,6 +11,10 @@ class OPEEventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title')
+          ->add('ceHours', 'Symfony\Component\Form\Extension\Core\Type\NumberType', array(
+            'label' => 'CE Hours',
+            'scale' => 1,
+          ))
           ->add('dates', 'Symfony\Component\Form\Extension\Core\Type\CollectionType', array(
             'entry_type' => 'Symfony\Component\Form\Extension\Core\Type\DateType',
             'allow_add' => true,

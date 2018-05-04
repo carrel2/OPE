@@ -23,6 +23,16 @@ class OPEEventTest extends TestCase
     $this->assertEquals("OPE Event", $opeEvent->getTitle());
   }
 
+  public function testCEHours() {
+    $opeEvent = new OPEEvent();
+
+    $this->assertNull($opeEvent->getCEHours());
+
+    $opeEvent->setCEHours(2.1);
+    $this->assertEquals(2.1, $opeEvent->getCEHours());
+    $this->assertCount(0, $this->validator->validate($opeEvent));
+  }
+
   public function testDates() {
     $opeEvent = new OPEEvent();
 

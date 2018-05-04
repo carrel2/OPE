@@ -25,6 +25,12 @@ class OPEEvent
   private $title;
 
   /**
+   * @Mapping\Column(type="decimal", scale=1)
+   * @Assert\Type(type="float")
+   */
+  private $ceHours;
+
+  /**
    * @Mapping\Column(type="array")
    * @Assert\All({
    *    @Assert\Date()
@@ -54,6 +60,16 @@ class OPEEvent
 
   public function getTitle() {
     return $this->title;
+  }
+
+  public function setCEHours($hours) {
+    $this->ceHours = $hours;
+
+    return $this;
+  }
+
+  public function getCEHours() {
+    return $this->ceHours;
   }
 
   public function setDates($dates) {

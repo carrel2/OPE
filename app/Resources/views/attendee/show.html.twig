@@ -3,22 +3,18 @@
 {% block body %}
     <h1>Attendee</h1>
 
-    <table>
+    <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ attendee.id }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
+                <th>First name</th>
                 <td>{{ attendee.firstname }}</td>
             </tr>
             <tr>
-                <th>Middleinitial</th>
+                <th>Initial</th>
                 <td>{{ attendee.middleinitial }}</td>
             </tr>
             <tr>
-                <th>Lastname</th>
+                <th>Last name</th>
                 <td>{{ attendee.lastname }}</td>
             </tr>
             <tr>
@@ -26,7 +22,7 @@
                 <td>{{ attendee.email }}</td>
             </tr>
             <tr>
-                <th>Phonenumber</th>
+                <th>Phone number</th>
                 <td>{{ attendee.phonenumber }}</td>
             </tr>
             <tr>

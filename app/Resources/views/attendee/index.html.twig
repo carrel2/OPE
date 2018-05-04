@@ -3,36 +3,29 @@
 {% block body %}
     <h1>Attendees list</h1>
 
-    <table>
+    <table class="table is-hoverable">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Middleinitial</th>
-                <th>Lastname</th>
+                <th>First name</th>
+                <th>Initial</th>
+                <th>Last name</th>
                 <th>Email</th>
-                <th>Phonenumber</th>
+                <th>Phone number</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for attendee in attendees %}
             <tr>
-                <td><a href="{{ path('attendee_show', { 'id': attendee.id }) }}">{{ attendee.id }}</a></td>
                 <td>{{ attendee.firstname }}</td>
                 <td>{{ attendee.middleinitial }}</td>
                 <td>{{ attendee.lastname }}</td>
                 <td>{{ attendee.email }}</td>
                 <td>{{ attendee.phonenumber }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a class="button" href="{{ path('attendee_show', { 'id': attendee.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a class="button" href="{{ path('attendee_edit', { 'id': attendee.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                    <a class="button" href="{{ path('attendee_show', { 'id': attendee.id }) }}">show</a>
+                    <a class="button" href="{{ path('attendee_edit', { 'id': attendee.id }) }}">edit</a>
+                    <a class="button" href="#">generate report</a>
                 </td>
             </tr>
         {% endfor %}

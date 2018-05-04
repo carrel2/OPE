@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Opeevent</h1>
+    <h1>Event</h1>
 
-    <table>
+    <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ oPEEvent.id }}</td>
-            </tr>
             <tr>
                 <th>Title</th>
                 <td>{{ oPEEvent.title }}</td>
+            </tr>
+            <tr>
+                <th>CE hours</th>
+                <td>{{ oPEEvent.ceHours }}</td>
             </tr>
             <tr>
                 <th>Dates</th>
