@@ -3,7 +3,6 @@
 namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\OPEEvent;
-use AppBundle\Entity\Attendee;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Validator\Validation;
 
@@ -50,7 +49,7 @@ class OPEEventTest extends TestCase
   }
 
   public function testAttendees() {
-    $attendee = new Attendee();
+    $attendee = new \AppBundle\Entity\Attendee();
     $opeEvent = new OPEEvent();
 
     $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $opeEvent->getAttendees());

@@ -114,27 +114,29 @@ class Attendee
     return $this->phonenumber;
   }
 
-  public function setOPEEvents(ArrayCollection $opeEvents) {
-    $this->opeEvents = $opeEvents;
-
-    return $this;
-  }
-
   public function getOPEEvents() {
     return $this->opeEvents;
   }
 
   public function addOPEEvent(\AppBundle\Entity\OPEEvent $opeEvent) {
-    if( !$this->opeEvents->contains($opeEvent) ) {
-      $this->opeEvents->add($opeEvent);
-
-      return $this;
+    if( $this->opeEvents->contains($opeEvent) ) {
+      return false;
     }
 
-    return false;
+    $this->opeEvents->add($opeEvent);
+    $opeEvent->addAttendee($this);
+
+    return $this;
   }
 
   public function removeOPEEvent(\AppBundle\Entity\OPEEvent $opeEvent) {
-    return $this->opeEvents->removeElement($opeEvent);
+    if( !$this->opeEvents->contains($opeEvent) ) {
+      return false;
+    }
+
+    $removed = $this->opeEvents->removeElement($opeEvent);
+    $opeEvent->removeAttendee($this);
+
+    return $removed;
   }
 }

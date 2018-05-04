@@ -69,7 +69,7 @@ class AttendeeTest extends TestCase
 
     $this->assertInstanceOf('\Doctrine\Common\Collections\ArrayCollection', $attendee->getOPEEvents());
     $this->assertTrue($attendee->getOPEEvents()->isEmpty());
-
+    //TODO: test add and remove worked both ways
     $this->assertNotFalse($attendee->addOPEEvent($opeEvent));
     $this->assertFalse($attendee->addOPEEvent($opeEvent));
     $this->assertTrue($attendee->getOPEEvents()->contains($opeEvent));

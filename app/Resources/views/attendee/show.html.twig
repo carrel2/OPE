@@ -29,6 +29,16 @@
                 <th>Phonenumber</th>
                 <td>{{ attendee.phonenumber }}</td>
             </tr>
+            <tr>
+                <th>Events</th>
+                <td>
+                  <ul>
+                    {% for event in attendee.opeEvents %}
+                      <li>{{ event.title }}<li>
+                    {% endfor %}
+                  </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 

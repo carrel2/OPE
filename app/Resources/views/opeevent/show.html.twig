@@ -17,6 +17,16 @@
                 <th>Dates</th>
                 <td>{% if oPEEvent.dates %}{{ oPEEvent.dates|join(', ') }}{% endif %}</td>
             </tr>
+            <tr>
+                <th>Attendees</th>
+                <td>
+                  <ul>
+                    {% for attendee in oPEEvent.attendees %}
+                      <li>{{ attendee.getFullName() }}<li>
+                    {% endfor %}
+                  </ul>
+                </td>
+            </tr>
         </tbody>
     </table>
 

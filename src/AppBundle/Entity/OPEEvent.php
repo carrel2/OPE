@@ -80,28 +80,29 @@ class OPEEvent
     return $this->dates;
   }
 
-  public function setAttendees(ArrayCollection $attendees) {
-    $this->attendees = $attendees;
-  }
-
   public function getAttendees() {
     return $this->attendees;
   }
 
   public function addAttendee(\AppBundle\Entity\Attendee $attendee) {
-    if( !$this->attendees->contains($attendee) ) {
-      $attendee->addOPEEvent($this);
-      $this->attendees->add($attendee);
-
-      return $this;
+    if( $this->attendees->contains($attendee) ) {
+      return false;
     }
 
-    return false;
+    $this->attendees->add($attendee);
+    $attendee->addOPEEvent($this);
+
+    return $this;
   }
 
   public function removeAttendee(\AppBundle\Entity\Attendee $attendee) {
+    if( !$this->attendees->contains($attendee) ) {
+      return false;
+    }
+
+    $removed = $this->attendees->removeElement($attendee);
     $attendee->removeOPEEvent($this);
 
-    return $this->attendees->removeElement($attendee);
+    return $removed;
   }
 }
