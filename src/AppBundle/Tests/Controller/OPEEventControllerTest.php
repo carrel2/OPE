@@ -16,7 +16,9 @@ class OPEEventControllerTest extends WebTestCase
         $this->assertEquals(200, $client->getResponse()->getStatusCode(), "Unexpected HTTP status code for GET /opeevent/");
         $crawler = $client->click($crawler->selectLink('Create a new event')->link());
 
-        // Fill in the form and submit it
+        echo $client->getResponse()->getContent();
+
+        /* // Fill in the form and submit it
         $form = $crawler->selectButton('Create')->form(array(
             'appbundle_opeevent[title]'  => 'Test',
             // ... other fields to fill
@@ -48,5 +50,6 @@ class OPEEventControllerTest extends WebTestCase
 
         // Check the entity has been delete on the list
         $this->assertNotRegExp('/Foo/', $client->getResponse()->getContent());
+        */
     }
 }
