@@ -31,6 +31,9 @@ class OPEEventTest extends TestCase
     $opeEvent->setCEHours(2.1);
     $this->assertEquals(2.1, $opeEvent->getCEHours());
     $this->assertCount(0, $this->validator->validate($opeEvent));
+
+    $opeEvent->setCEHours("Twelve");
+    $this->assertCount(1, $this->validator->validate($opeEvent));
   }
 
   public function testDates() {
