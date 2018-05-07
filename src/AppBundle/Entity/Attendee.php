@@ -7,6 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * TODO: add unique constraints to fields that need to be unique
+ * 
  * @Mapping\Entity
  * @Mapping\Table(name="attendee")
  */
