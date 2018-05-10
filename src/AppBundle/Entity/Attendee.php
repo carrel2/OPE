@@ -4,13 +4,16 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * TODO: add unique constraints to fields that need to be unique
- * 
+ *
  * @Mapping\Entity
  * @Mapping\Table(name="attendee")
+ * @UniqueEntity("email")
+ * @UniqueEntity("phonenumber")
  */
 class Attendee
 {
