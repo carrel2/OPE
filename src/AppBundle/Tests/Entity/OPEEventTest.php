@@ -4,16 +4,9 @@ namespace AppBundle\Tests\Entity;
 
 use AppBundle\Entity\OPEEvent;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Validator\Validation;
 
 class OPEEventTest extends TestCase
 {
-  private $validator;
-
-  public function __construct() {
-    $this->validator = Validation::createValidatorBuilder()->enableAnnotationMapping()->getValidator();
-  }
-
   public function testTitle() {
     $opeEvent = new OPEEvent();
 
@@ -30,10 +23,6 @@ class OPEEventTest extends TestCase
 
     $opeEvent->setCEHours(2.1);
     $this->assertEquals(2.1, $opeEvent->getCEHours());
-    $this->assertCount(0, $this->validator->validate($opeEvent));
-
-    $opeEvent->setCEHours("Twelve");
-    $this->assertCount(1, $this->validator->validate($opeEvent));
   }
 
   public function testDates() {
@@ -44,21 +33,18 @@ class OPEEventTest extends TestCase
     $this->assertInternalType('array', $dates);
     $this->assertEmpty($dates);
 
-    $dates = [date("Y-m-d"), date("Y-m-d", strtotime("+1 week"))];
+    $dates = [date("Y-m-d", strtotime("+1 day")), date("Y-m-d", strtotime("+1 week"))];
 
     $opeEvent->setDates($dates);
-    $this->assertEquals(0, count($this->validator->validate($opeEvent)));
     $this->assertEquals($dates, $opeEvent->getDates());
 
-    $currentTime = time();
+    $currentDate = date("Y-m-d");
 
-    $opeEvent->addDate($currentTime);
-    $this->assertContains($currentTime, $opeEvent->getDates());
-    $this->assertGreaterThan(0, count($this->validator->validate($opeEvent)));
+    $opeEvent->addDate($currentDate);
+    $this->assertContains($currentDate, $opeEvent->getDates());
 
-    $opeEvent->removeDate($currentTime);
-    $this->assertNotContains($currentTime, $opeEvent->getDates());
-    $this->assertEquals(0, count($this->validator->validate($opeEvent)));
+    $opeEvent->removeDate($currentDate);
+    $this->assertNotContains($currentDate, $opeEvent->getDates());
   }
 
   public function testAttendees() {
