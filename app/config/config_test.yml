@@ -8,6 +8,14 @@ framework:
     profiler:
         collect: false
 
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        dbname: ope_test
+        user: ope
+        password: qZq8DuFyb3Dz69Bn
+        charset: UTF8
+
 web_profiler:
     toolbar: false
     intercept_redirects: false
