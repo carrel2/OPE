@@ -39,7 +39,7 @@ class OPEEventController extends Controller
      */
     public function newAction(Request $request)
     {
-        $oPEEvent = new Opeevent();
+        $oPEEvent = new OPEEvent();
         $form = $this->createForm('AppBundle\Form\OPEEventType', $oPEEvent);
         $form->handleRequest($request);
 

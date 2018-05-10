@@ -21,8 +21,20 @@ class AttendeeControllerTest extends WebTestCase
             'appbundle_attendee[firstname]'  => 'John',
             'appbundle_attendee[middleinitial]'  => 'H.',
             'appbundle_attendee[lastname]'  => 'Doe',
-            'appbundle_attendee[email]'  => 'john.doe@example.com',
+            'appbundle_attendee[email]'  => 'email@example.com',
             'appbundle_attendee[phonenumber]'  => '555-555-5555',
+            // ... other fields to fill
+        ));
+
+        $crawler = $client->submit($form);
+        $this->assertGreaterThan(0, $crawler->filter('span.help.is-danger')->count());
+
+        $form = $crawler->selectButton('Create')->form(array(
+            'appbundle_attendee[firstname]'  => 'John',
+            'appbundle_attendee[middleinitial]'  => 'H.',
+            'appbundle_attendee[lastname]'  => 'Doe',
+            'appbundle_attendee[email]'  => 'john.doe@example.com',
+            'appbundle_attendee[phonenumber]'  => '555 555-5555',
             // ... other fields to fill
         ));
 
