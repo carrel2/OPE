@@ -3,10 +3,10 @@
 namespace AppBundle\DataFixtures;
 
 use AppBundle\Entity\Attendee;
-use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class OPEFixtures extends Fixture
+class OPEFixtures implements FixtureInterface
 {
     public function load(ObjectManager $manager) {
         $attendee = new Attendee();
