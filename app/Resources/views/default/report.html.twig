@@ -1,0 +1,30 @@
+{#
+/**
+ * Available variables
+ * -------------------
+ *
+ * {{ base_object }} - Attendee or OPEEvent object
+ * {{ list }} - array of OPEEvent or Attendee objects (depends on base_object)
+ *
+ */
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th colspan="4">
+          <p class="title">{{ base_object }}</p>
+        </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {% for i in list %}
+        {{ i.toListItem()|raw }}
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

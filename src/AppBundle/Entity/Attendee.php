@@ -15,7 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @UniqueEntity("email")
  * @UniqueEntity("phonenumber")
  */
-class Attendee
+class Attendee implements ListInterface
 {
   /**
    * @Mapping\Column(type="integer")
@@ -59,6 +59,10 @@ class Attendee
 
   public function __construct() {
     $this->opeEvents = new ArrayCollection();
+  }
+
+  public function __toString() {
+    return $this->getFullName();
   }
 
   public function getId() {
@@ -143,5 +147,12 @@ class Attendee
     $opeEvent->removeAttendee($this);
 
     return $removed;
+  }
+
+  public function toListItem() {
+    $fullName = htmlspecialchars($this->getFullName());
+    $email = htmlspecialchars($this->email);
+
+    return "<tr><td>$fullName</td><td>$email</td></tr>";
   }
 }

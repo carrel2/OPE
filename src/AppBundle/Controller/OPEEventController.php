@@ -133,4 +133,15 @@ class OPEEventController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @Route("/report/{id}")
+     */
+    public function reportAction(Request $r, OPEEvent $oPEEvent)
+    {
+      return $this->render('default/report.html.twig', array(
+        'base_object' => $oPEEvent,
+        'list' => $oPEEvent->getAttendees(),
+      ));
+    }
 }

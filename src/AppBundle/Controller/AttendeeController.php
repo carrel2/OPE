@@ -133,4 +133,15 @@ class AttendeeController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @Route("/report/{id}")
+     */
+    public function reportAction(Request $r, Attendee $attendee)
+    {
+      return $this->render('default/report.html.twig', array(
+        'base_object' => $attendee,
+        'list' => $attendee->getOPEEvents(),
+      ));
+    }
 }

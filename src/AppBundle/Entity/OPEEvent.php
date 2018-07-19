@@ -10,7 +10,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @Mapping\Entity
  * @Mapping\Table(name="ope_event")
  */
-class OPEEvent
+class OPEEvent implements ListInterface
 {
   /**
    * @Mapping\Column(type="integer")
@@ -46,6 +46,10 @@ class OPEEvent
   public function __construct() {
     $this->dates = [];
     $this->attendees = new ArrayCollection();
+  }
+
+  public function __toString() {
+    return $this->title;
   }
 
   public function getId() {
@@ -120,5 +124,12 @@ class OPEEvent
     $attendee->removeOPEEvent($this);
 
     return $removed;
+  }
+
+  public function toListItem() {
+    $title = htmlspecialchars($this->title);
+    $ceHours = htmlspecialchars($this->ceHours);
+
+    return "<tr><td>$title</td><td>$ceHours</td></tr>";
   }
 }
