@@ -149,10 +149,26 @@ class Attendee implements ListInterface
     return $removed;
   }
 
+  public function getTotalHours() {
+    $total = 0;
+
+    foreach ($this->opeEvents as $event) {
+      $total += $event->getCEHours();
+    }
+
+    return $total;
+  }
+
   public function toListItem() {
     $fullName = htmlspecialchars($this->getFullName());
     $email = htmlspecialchars($this->email);
 
     return "<tr><td>$fullName</td><td>$email</td></tr>";
+  }
+
+  public function getSummary() {
+    $totalHours = $this->getTotalHours();
+
+    return "Events attended: {$this->opeEvents->count()}, Total hours: $totalHours";
   }
 }

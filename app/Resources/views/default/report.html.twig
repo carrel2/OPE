@@ -26,5 +26,13 @@
         {{ i.toListItem()|raw }}
       {% endfor %}
     </tbody>
+
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <p class="subtitle">{{ base_object.getSummary() }}</p>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 {% endblock %}

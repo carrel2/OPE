@@ -135,7 +135,7 @@ class OPEEventController extends Controller
     }
 
     /**
-     * @Route("/report/{id}")
+     * @Route("/report/{id}", name="opeevent_report")
      */
     public function reportAction(Request $r, OPEEvent $oPEEvent)
     {

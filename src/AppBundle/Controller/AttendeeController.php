@@ -135,7 +135,7 @@ class AttendeeController extends Controller
     }
 
     /**
-     * @Route("/report/{id}")
+     * @Route("/report/{id}", name="attendee_report")
      */
     public function reportAction(Request $r, Attendee $attendee)
     {

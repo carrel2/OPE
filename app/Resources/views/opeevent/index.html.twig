@@ -21,7 +21,7 @@
                 <td>
                     <a class="button" href="{{ path('opeevent_show', { 'id': oPEEvent.id }) }}">show</a>
                     <a class="button" href="{{ path('opeevent_edit', { 'id': oPEEvent.id }) }}">edit</a>
-                    <a class="button" href="#">generate attendance</a>
+                    <a class="button" href="{{ path('opeevent_report', { 'id': oPEEvent.id }) }}">generate attendance</a>
                 </td>
             </tr>
         {% endfor %}

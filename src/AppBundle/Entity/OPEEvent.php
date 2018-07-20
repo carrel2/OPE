@@ -132,4 +132,8 @@ class OPEEvent implements ListInterface
 
     return "<tr><td>$title</td><td>$ceHours</td></tr>";
   }
+
+  public function getSummary() {
+    
+  }
 }
