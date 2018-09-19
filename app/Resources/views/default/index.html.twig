@@ -64,9 +64,17 @@
 {% endblock %}
 
 {% block javascripts %}
-  {# TODO: minimize ajax requests #}
   <script>
     function getForm(element) {
+      var form = document.getElementById(element.id + "_div");
+
+      if( form ) {
+        form.style.display = "initial";
+        element.style.display = "none";
+
+        return;
+      }
+
       var xhttp = new XMLHttpRequest();
       var path = element.dataset.path;
 
@@ -114,7 +122,7 @@
       var div = element.parentNode.parentNode;
       var id = div.id.replace("_div", "");
 
-      div.remove();
+      div.style.display = "none";
       document.getElementById(id).style.display = "initial";
     }
 
@@ -124,7 +132,17 @@
       var current = document.getElementById(element.dataset.containerId);
 
       if( current ) {
+        var figures =  document.getElementsByTagName("figure");
+
+        for( var i = 0; i < figures.length; i++ ) {
+          if( figures[i] !== current && figures[i].className == "active" ) {
+            figures[i].style.display = "none";
+            figures[i].className = "";
+          }
+        }
+
         current.style.display = current.style.display == "none" ? "initial" : "none";
+        current.className = "active";
 
         return;
       }
@@ -134,16 +152,20 @@
 
       xhttp.onreadystatechange = function() {
         if( this.readyState == 4 && this.status == 200 ) {
-          var figure = document.getElementsByTagName("figure");
+          var figures = document.getElementsByTagName("figure");
 
-          if( figure.length ) {
-            figure[0].remove();
+          for( var i = 0; i < figures.length; i++ ) {
+            if( figures[i].className == "active" ) {
+              figures[i].style.display = "none";
+              figures[i].className = "";
+            }
           }
 
           var container = document.createElement("figure");
 
           container.innerHTML = this.responseText;
           container.id = element.dataset.containerId;
+          container.className = "active";
 
           element.parentNode.appendChild(container);
         }
