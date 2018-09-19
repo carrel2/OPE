@@ -15,17 +15,21 @@
   <div class="columns">
     <div class="column">
       <table class="table is-fullwidth">
-        <tbody>
+        <tbody id="events">
           <tr>
-            <td>
-              <a class="button is-dark is-fullwidth" href="{{ path('opeevent_new') }}">Create a new event</a>
+            <td colspan="2">
+              <button id="events_button" class="button is-dark is-fullwidth" data-path="{{ path('opeevent_new') }}" onclick="getForm(this)">Create a new event</button>
             </td>
           </tr>
 
           {% for event in events %}
             <tr>
               <td>
-                <a href="{{ path('opeevent_show', {'id': event.id}) }}">{{ event.title }}</a>
+                <a href="{{ path('opeevent_show', {'id': event.id}) }}" data-container-id="event_{{ event.id }}" onclick="show(event, this)">{{ event.title }}</a>
+              </td>
+              <td>
+                <a class="button is-pulled-right" href="{{ path('opeevent_report', { 'id': event.id }) }}">generate attendance</a>
+                <a class="button is-pulled-right" href="{{ path('opeevent_edit', { 'id': event.id }) }}">edit</a>
               </td>
             </tr>
           {% endfor %}
@@ -35,17 +39,21 @@
 
     <div class="column">
       <table class="table is-fullwidth">
-        <tbody>
+        <tbody id="attendees">
           <tr>
-            <td>
-              <a class="button is-dark is-fullwidth" href="{{ path('attendee_new') }}">Create a new attendee</a>
+            <td colspan="2">
+              <button id="attendees_button" class="button is-dark is-fullwidth" data-path="{{ path('attendee_new') }}" onclick="getForm(this)">Create a new attendee</button>
             </td>
           </tr>
 
           {% for attendee in attendees %}
             <tr>
               <td>
-                <a href="{{ path('attendee_show', {'id': attendee.id}) }}">{{ attendee.getFullName() }}</a>
+                <a href="{{ path('attendee_show', {'id': attendee.id}) }}" data-container-id="attendee_{{ attendee.id }}" onclick="show(event, this)">{{ attendee.getFullName() }}</a>
+              </td>
+              <td>
+                <a class="button is-pulled-right" href="{{ path('attendee_report', { 'id': attendee.id }) }}">generate report</a>
+                <a class="button is-pulled-right" href="{{ path('attendee_edit', { 'id': attendee.id }) }}">edit</a>
               </td>
             </tr>
           {% endfor %}
@@ -53,4 +61,96 @@
       </table>
     </div>
   </div>
+{% endblock %}
+
+{% block javascripts %}
+  {# TODO: minimize ajax requests #}
+  <script>
+    function getForm(element) {
+      var xhttp = new XMLHttpRequest();
+      var path = element.dataset.path;
+
+      xhttp.onreadystatechange = function() {
+        if( this.readyState == 4 && this.status == 200 ) {
+          var div = document.createElement("div");
+
+          div.innerHTML = this.responseText;
+          div.id = element.id + "_div";
+
+          element.parentNode.appendChild(div);
+          element.style.display = "none";
+        }
+      }
+
+      xhttp.open("GET", path, true);
+      xhttp.send();
+    }
+
+    function submitForm(event, form) {
+      event.preventDefault();
+
+      var xhttp = new XMLHttpRequest();
+      var data = new FormData(form);
+      var path = form.action;
+
+      xhttp.onreadystatechange = function() {
+        if( this.readyState == 4 && this.status == 200 ) {
+          var response = JSON.parse(this.responseText);
+          var tr = document.createElement("tr");
+
+          tr.innerHTML = response.text;
+
+          document.getElementById(response.id).appendChild(tr);
+          document.getElementById(response.id + "_button").style.display = "initial";
+          document.getElementById(response.id + "_button_div").remove();
+        }
+      }
+
+      xhttp.open("POST", path, true);
+      xhttp.send(data);
+    }
+
+    function cancel(element) {
+      var div = element.parentNode.parentNode;
+      var id = div.id.replace("_div", "");
+
+      div.remove();
+      document.getElementById(id).style.display = "initial";
+    }
+
+    function show(event, element) {
+      event.preventDefault();
+
+      var current = document.getElementById(element.dataset.containerId);
+
+      if( current ) {
+        current.style.display = current.style.display == "none" ? "initial" : "none";
+
+        return;
+      }
+
+      var xhttp = new XMLHttpRequest();
+      var path = element.href;
+
+      xhttp.onreadystatechange = function() {
+        if( this.readyState == 4 && this.status == 200 ) {
+          var figure = document.getElementsByTagName("figure");
+
+          if( figure.length ) {
+            figure[0].remove();
+          }
+
+          var container = document.createElement("figure");
+
+          container.innerHTML = this.responseText;
+          container.id = element.dataset.containerId;
+
+          element.parentNode.appendChild(container);
+        }
+      }
+
+      xhttp.open("GET", path, true);
+      xhttp.send();
+    }
+  </script>
 {% endblock %}

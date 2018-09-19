@@ -1,16 +1,7 @@
-{% extends 'base.html.twig' %}
+<h1 class="title">Attendee creation</h1>
 
-{% block body %}
-    <h1>Attendee creation</h1>
-
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input class="button" type="submit" value="Create" />
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a class="button" href="{{ path('attendee_index') }}">Back to the list</a>
-        </li>
-    </ul>
-{% endblock %}
+{{ form_start( form, {'action': path('attendee_new'), 'onsubmit': 'submitForm(event, this)'} ) }}
+    {{ form_widget(form) }}
+    <input class="button" type="submit" value="Create" />
+    <input class="button" type="button" value="Cancel" onclick="cancel(this)" />
+{{ form_end(form) }}

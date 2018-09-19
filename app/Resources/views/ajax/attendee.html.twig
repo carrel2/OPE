@@ -1,0 +1,7 @@
+<td>
+  <a href="{{ path('attendee_show', {'id': attendee.id}) }}">{{ attendee.getFullName() }}</a>
+</td>
+<td>
+  <a class="button is-pulled-right" href="{{ path('attendee_report', { 'id': attendee.id }) }}">generate report</a>
+  <a class="button is-pulled-right" href="{{ path('attendee_edit', { 'id': attendee.id }) }}">edit</a>
+</td>

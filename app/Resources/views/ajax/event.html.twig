@@ -1,0 +1,7 @@
+<td>
+  <a href="{{ path('opeevent_show', {'id': oPEEvent.id}) }}">{{ oPEEvent.title }}</a>
+</td>
+<td>
+  <a class="button is-pulled-right" href="{{ path('opeevent_report', { 'id': oPEEvent.id }) }}">generate attendance</a>
+  <a class="button is-pulled-right" href="{{ path('opeevent_edit', { 'id': oPEEvent.id }) }}">edit</a>
+</td>

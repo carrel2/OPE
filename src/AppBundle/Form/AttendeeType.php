@@ -35,7 +35,10 @@ class AttendeeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Attendee'
+            'data_class' => 'AppBundle\Entity\Attendee',
+            'attr' => array(
+              'onsubmit' => 'submitForm(event, this)',
+            )
         ));
     }
 

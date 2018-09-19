@@ -1,54 +1,34 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Attendee</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>First name</th>
-                <td>{{ attendee.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Initial</th>
-                <td>{{ attendee.middleinitial }}</td>
-            </tr>
-            <tr>
-                <th>Last name</th>
-                <td>{{ attendee.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ attendee.email }}</td>
-            </tr>
-            <tr>
-                <th>Phone number</th>
-                <td>{{ attendee.phonenumber }}</td>
-            </tr>
-            <tr>
-                <th>Events</th>
-                <td>
-                  <ul>
-                    {% for event in attendee.opeEvents %}
-                      <li>{{ event.title }}<li>
-                    {% endfor %}
-                  </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a class="button" href="{{ path('attendee_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a class="button" href="{{ path('attendee_edit', { 'id': attendee.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input class="button" type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-{% endblock %}
+<table class="table">
+    <tbody>
+        <tr>
+            <th>First name</th>
+            <td>{{ attendee.firstname }}</td>
+        </tr>
+        <tr>
+            <th>Initial</th>
+            <td>{{ attendee.middleinitial }}</td>
+        </tr>
+        <tr>
+            <th>Last name</th>
+            <td>{{ attendee.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ attendee.email }}</td>
+        </tr>
+        <tr>
+            <th>Phone number</th>
+            <td>{{ attendee.phonenumber }}</td>
+        </tr>
+        <tr>
+            <th>Events</th>
+            <td>
+              <ul>
+                {% for event in attendee.opeEvents %}
+                  <li>{{ event.title }}<li>
+                {% endfor %}
+              </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>

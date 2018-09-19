@@ -5,7 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Attendee;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Attendee controller.
@@ -48,13 +51,21 @@ class AttendeeController extends Controller
             $em->persist($attendee);
             $em->flush();
 
-            return $this->redirectToRoute('attendee_show', array('id' => $attendee->getId()));
+            $response = new JsonResponse();
+            $response->setData(array(
+              'id' => "attendees",
+              'text' => $this->renderView('ajax/attendee.html.twig', array(
+                'attendee' => $attendee,
+              )),
+            ));
+
+            return $response;
         }
 
-        return $this->render('attendee/new.html.twig', array(
+        return new Response($this->renderView('attendee/new.html.twig', array(
             'attendee' => $attendee,
             'form' => $form->createView(),
-        ));
+        )));
     }
 
     /**
@@ -67,10 +78,9 @@ class AttendeeController extends Controller
     {
         $deleteForm = $this->createDeleteForm($attendee);
 
-        return $this->render('attendee/show.html.twig', array(
+        return new Response($this->renderView('attendee/show.html.twig', array(
             'attendee' => $attendee,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        )));
     }
 
     /**
@@ -88,7 +98,7 @@ class AttendeeController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('attendee_edit', array('id' => $attendee->getId()));
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('attendee/edit.html.twig', array(

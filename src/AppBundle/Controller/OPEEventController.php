@@ -5,7 +5,10 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\OPEEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * Opeevent controller.
@@ -48,13 +51,21 @@ class OPEEventController extends Controller
             $em->persist($oPEEvent);
             $em->flush();
 
-            return $this->redirectToRoute('opeevent_show', array('id' => $oPEEvent->getId()));
+            $response = new JsonResponse();
+            $response->setData(array(
+              'id' => "events",
+              'text' => $this->renderView('ajax/event.html.twig', array(
+                'event' => $oPEEvent,
+              )),
+            ));
+
+            return $response;
         }
 
-        return $this->render('opeevent/new.html.twig', array(
+        return new Response($this->renderView('opeevent/new.html.twig', array(
             'oPEEvent' => $oPEEvent,
             'form' => $form->createView(),
-        ));
+        )));
     }
 
     /**
@@ -65,12 +76,9 @@ class OPEEventController extends Controller
      */
     public function showAction(OPEEvent $oPEEvent)
     {
-        $deleteForm = $this->createDeleteForm($oPEEvent);
-
-        return $this->render('opeevent/show.html.twig', array(
+        return new Response($this->renderView('opeevent/show.html.twig', array(
             'oPEEvent' => $oPEEvent,
-            'delete_form' => $deleteForm->createView(),
-        ));
+        )));
     }
 
     /**
@@ -88,7 +96,7 @@ class OPEEventController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('opeevent_edit', array('id' => $oPEEvent->getId()));
+            return $this->redirectToRoute('homepage');
         }
 
         return $this->render('opeevent/edit.html.twig', array(

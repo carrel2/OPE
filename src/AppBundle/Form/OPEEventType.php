@@ -31,7 +31,10 @@ class OPEEventType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\OPEEvent'
+            'data_class' => 'AppBundle\Entity\OPEEvent',
+            'attr' => array(
+              'onsubmit' => 'submitForm(event, this)',
+            )
         ));
     }
 

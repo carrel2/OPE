@@ -1,46 +1,26 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Event</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Title</th>
-                <td>{{ oPEEvent.title }}</td>
-            </tr>
-            <tr>
-                <th>CE hours</th>
-                <td>{{ oPEEvent.ceHours }}</td>
-            </tr>
-            <tr>
-                <th>Dates</th>
-                <td>{% if oPEEvent.dates %}{{ oPEEvent.dates|join(', ') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Attendees</th>
-                <td>
-                  <ul>
-                    {% for attendee in oPEEvent.attendees %}
-                      <li>{{ attendee.getFullName() }}<li>
-                    {% endfor %}
-                  </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a class="button" href="{{ path('opeevent_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a class="button" href="{{ path('opeevent_edit', { 'id': oPEEvent.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input class="button" type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
-{% endblock %}
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Title</th>
+            <td>{{ oPEEvent.title }}</td>
+        </tr>
+        <tr>
+            <th>CE hours</th>
+            <td>{{ oPEEvent.ceHours }}</td>
+        </tr>
+        <tr>
+            <th>Dates</th>
+            <td>{% if oPEEvent.dates %}{{ oPEEvent.dates|join(', ') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Attendees</th>
+            <td>
+              <ul>
+                {% for attendee in oPEEvent.attendees %}
+                  <li>{{ attendee.getFullName() }}<li>
+                {% endfor %}
+              </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
