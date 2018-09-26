@@ -53,6 +53,16 @@ class Attendee implements ListInterface
   private $phonenumber;
 
   /**
+   * @Mapping\Column(type="array")
+   */
+  private $dietaryRestrictions;
+
+  /**
+   * @Mapping\Column(type="boolean")
+   */
+  private $receiveEmails = false;
+
+  /**
    * @Mapping\ManyToMany(targetEntity="OPEEvent", inversedBy="attendees")
    */
   private $opeEvents;
@@ -121,6 +131,40 @@ class Attendee implements ListInterface
 
   public function getPhoneNumber() {
     return $this->phonenumber;
+  }
+
+  public function setDietaryRestrictions($restrictions) {
+    $this->dietaryRestrictions = $restrictions;
+
+    return $this;
+  }
+
+  public function addDietaryRestriction($restriction) {
+    $this->dietaryRestrictions[] = $restriction;
+
+    return $this;
+  }
+
+  public function removeDietaryRestriction($restriction) {
+    $pos = array_search($restriction, $this->dietaryRestrictions);
+
+    array_splice($this->dietaryRestrictions, $pos, 1);
+
+    return $this;
+  }
+
+  public function getDietaryRestrictions() {
+    return $this->dietaryRestrictions;
+  }
+
+  public function setReceiveEmails($bool) {
+    $this->receiveEmails = $bool;
+
+    return $this;
+  }
+
+  public function getReceiveEmails() {
+    return $this->receiveEmails;
   }
 
   public function getOPEEvents() {

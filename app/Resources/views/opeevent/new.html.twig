@@ -1,6 +1,6 @@
 <h1 class="title">Event creation</h1>
 
-{{ form_start( form, {'action': path('attendee_new'), 'onsubmit': 'submitForm(event, this)'} ) }}
+{{ form_start( form, {'action': path('opeevent_new'), 'onsubmit': 'submitForm(event, this)'} ) }}
     {{ form_widget(form) }}
     <input class="button" type="submit" value="Create" />
     <input class="button" type="button" value="Cancel" onclick="cancel(this)" />

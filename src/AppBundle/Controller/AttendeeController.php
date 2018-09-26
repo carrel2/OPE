@@ -18,23 +18,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class AttendeeController extends Controller
 {
     /**
-     * Lists all attendee entities.
-     *
-     * @Route("/", name="attendee_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $attendees = $em->getRepository('AppBundle:Attendee')->findAll();
-
-        return $this->render('attendee/index.html.twig', array(
-            'attendees' => $attendees,
-        ));
-    }
-
-    /**
      * Creates a new attendee entity.
      *
      * @Route("/new", name="attendee_new")
@@ -125,7 +108,7 @@ class AttendeeController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('attendee_index');
+        return $this->redirectToRoute('homepage');
     }
 
     /**

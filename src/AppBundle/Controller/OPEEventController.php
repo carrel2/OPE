@@ -18,23 +18,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class OPEEventController extends Controller
 {
     /**
-     * Lists all oPEEvent entities.
-     *
-     * @Route("/", name="opeevent_index")
-     * @Method("GET")
-     */
-    public function indexAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $oPEEvents = $em->getRepository('AppBundle:OPEEvent')->findAll();
-
-        return $this->render('opeevent/index.html.twig', array(
-            'oPEEvents' => $oPEEvents,
-        ));
-    }
-
-    /**
      * Creates a new oPEEvent entity.
      *
      * @Route("/new", name="opeevent_new")
@@ -123,7 +106,7 @@ class OPEEventController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('opeevent_index');
+        return $this->redirectToRoute('homepage');
     }
 
     /**

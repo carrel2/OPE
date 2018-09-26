@@ -110,7 +110,13 @@
 
           document.getElementById(response.id).appendChild(tr);
           document.getElementById(response.id + "_button").style.display = "initial";
-          document.getElementById(response.id + "_button_div").remove();
+          document.getElementById(response.id + "_button_div").style.display = "none";
+
+          var children = form.querySelectorAll("input:not(.button)");
+
+          for( var i =0; i < children.length; i++ ) {
+            children[i].value = "";
+          }
         }
       }
 

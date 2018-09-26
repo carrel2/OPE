@@ -23,6 +23,22 @@ class AttendeeType extends AbstractType
         ->add('phonenumber', null, array(
           'label' => 'Phone number',
         ))
+        ->add('receiveEmails', null, array(
+          'label' => 'Check if this attendee wants to receive emails',
+          'required' => false,
+          'label_attr' => array(
+            'class' => 'is-large',
+          ),
+        ))
+        ->add('dietaryRestrictions', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', array(
+          'label' => 'Dietary Restrictions',
+          'choices' => array(
+            'No Dairy' => 'no_dairy',
+            'No Gluten' => 'no_gluten',
+          ),
+          'multiple' => true,
+          'choices_as_values' => true,
+        ))
         ->add('opeEvents', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
           'class' => 'AppBundle:OPEEvent',
           'label' => 'Events attended',
